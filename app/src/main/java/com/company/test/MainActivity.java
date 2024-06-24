@@ -42,7 +42,7 @@ public class MainActivity extends SettingsApp {
             showExitMenu(this);
         }
         if (view.getId() == R.id.buttonExit) {
-            finish();
+            finishAffinity();
         }
         if (view.getId() == R.id.buttonStay) {
             dialog.dismiss();

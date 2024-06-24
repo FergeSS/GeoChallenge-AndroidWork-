@@ -2,10 +2,12 @@ package com.company.test;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -22,7 +24,6 @@ public class game extends SettingsApp {
     long currentTime = System.currentTimeMillis();
     long heartTime;
     int countOfQuestion;
-
     ProgressBar progressBar;
     boolean isStop = false;
     TextView timer;
@@ -217,7 +218,7 @@ public class game extends SettingsApp {
                 }
             }
         }
-        if (view.getId() == R.id.button2) {
+        else if (view.getId() == R.id.button2) {
             if (question.get(id).getCorrectAnswer() == 2) {
                 nextQuest(button2);
             }
@@ -238,7 +239,7 @@ public class game extends SettingsApp {
                 }
             }
         }
-        if (view.getId() == R.id.button3) {
+        else if (view.getId() == R.id.button3) {
             if (question.get(id).getCorrectAnswer() == 3) {
                 nextQuest(button3);
             }
@@ -259,7 +260,7 @@ public class game extends SettingsApp {
                 }
             }
         }
-        if (view.getId() == R.id.button4) {
+        else if (view.getId() == R.id.button4) {
             if (question.get(id).getCorrectAnswer() == 4) {
                 nextQuest(button4);
             }
@@ -280,29 +281,35 @@ public class game extends SettingsApp {
                 }
             }
         }
-        if (view.getId() == R.id.buttonBack) {
+        else if (view.getId() == R.id.buttonBack) {
             showExitMenu(this);
         }
-        if (view.getId() == R.id.buttonSkip) {
+        else if (view.getId() == R.id.buttonSkip) {
             --countOfQuestion;
             editorCountQuestion.putInt("count", countOfQuestion);
             editorCountQuestion.apply();
             nextQuest(null);
         }
-        if (view.getId() == R.id.buttonPause) {
+        else if (view.getId() == R.id.buttonPause) {
             showPauseMenu(this);
         }
-        if (view.getId() == R.id.buttonContinue || view.getId() == R.id.buttonStay){
+        else if (view.getId() == R.id.buttonContinue || view.getId() == R.id.buttonStay){
             isStop = false;
             dialog.dismiss();
         }
-        if (view.getId() == R.id.buttonSettings) {
+        else if (view.getId() == R.id.buttonSettings) {
             Intent actv = new Intent(this, settings.class);
             startActivity(actv);
         }
-        if (view.getId() == R.id.buttonExitToMenu || view.getId() == R.id.buttonOk) {
+        else if (view.getId() == R.id.buttonExitToMenu) {
+            editorQuest.putInt("quest", id);
+            editorQuest.apply();
             finish();
         }
+        else if (view.getId() == R.id.buttonOk) {
+            finish();
+        }
+
         if (id > 19) {
             id = 0;
             editorQuest.putInt("quest", id);
@@ -339,6 +346,7 @@ public class game extends SettingsApp {
                     handlerTimer.postDelayed(this, 100);
                     progressBar.setProgress(timeRemaining);
                 } else {
+                    --countOfQuestion;
                     nextQuest(null);
                     handlerTimer.postDelayed(this, 100);
                 }
@@ -384,6 +392,12 @@ public class game extends SettingsApp {
         builder.setView(view);
         dialog = builder.create();
         Window window = dialog.getWindow();
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            public void onDismiss(DialogInterface dialog) {
+                isStop = false;
+            }
+        });
         if (window != null) {
             window.setBackgroundDrawableResource(android.R.color.transparent);
 
@@ -434,6 +448,11 @@ public class game extends SettingsApp {
         builder.setView(view);
         dialog = builder.create();
         Window window = dialog.getWindow();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            public void onDismiss(DialogInterface dialog) {
+                isStop = false;
+            }
+        });
         if (window != null) {
             window.setBackgroundDrawableResource(android.R.color.transparent);
 
