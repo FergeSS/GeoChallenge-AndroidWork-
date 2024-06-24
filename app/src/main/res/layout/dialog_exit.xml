@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="342dp"
+    android:layout_height="163dp">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mini_frame" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3">
+
+        <ImageButton
+            android:id="@+id/buttonExit"
+            android:layout_width="142dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/exit_button_sel" />
+
+        <ImageButton
+            android:id="@+id/buttonStay"
+            android:layout_width="142dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/stay_button_sel" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
