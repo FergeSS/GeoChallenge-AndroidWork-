@@ -1,17 +1,16 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.android.application)
 }
 
 android {
-    namespace = "com.company.test"
+    namespace = "com.ludiza.ximdev"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.company.test"
+        applicationId = "com.ludiza.ximdev"
         minSdk = 24
         targetSdk = 34
-        versionCode = 3
+        versionCode = 5
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -20,7 +19,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -30,11 +32,12 @@ android {
 }
 
 dependencies {
+
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.activity)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
-
